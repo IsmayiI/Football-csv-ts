@@ -1,13 +1,19 @@
 
 import CsvFileReader from "./CsvFileReader"
 import MatchReader from "./MatchReader"
-import MatchResult from "./MatchResult"
+import Summary from "./Summary"
+import WinsAnalysis from "./analyzers/WinsAnalysis"
+import ConsoleReport from "./reportTargets/ConsoleReport"
 
 const csvFileReader = new CsvFileReader('football.csv')
 const matchReader = new MatchReader(csvFileReader)
 
 matchReader.load()
 
+const MUwins = new WinsAnalysis('Man United')
+const report = new ConsoleReport()
 
 
-console.log(MUwin)
+const summary = new Summary(MUwins, report)
+
+summary.buildAndPrintReport(matchReader.matches)
